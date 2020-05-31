@@ -1,5 +1,7 @@
-import React from 'react';
-import {createGlobalStyle} from "styled-components"
+import React from "react";
+import { createGlobalStyle } from "styled-components";
+
+import MapContainer from "./map/MapContainer"
 
 const GlobalStyle = createGlobalStyle`
   *{
@@ -7,11 +9,14 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     font-family: 'Roboto', sans-serif;
   }
-`
+`;
 
 function App() {
   return (
-   <GlobalStyle/>
+    <>
+      <GlobalStyle />
+      <MapContainer/>
+    </>
   );
 }
 
