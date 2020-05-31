@@ -3,15 +3,18 @@ import styled from "styled-components";
 import { Map as LeafletMap, TileLayer } from "react-leaflet";
 
 const Wrapper = styled.div`
-  width: 800px;
-  height: 500px;
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
   /* background-color: red; */
 `;
 
 
 const Map = styled(LeafletMap)`
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: 80%;
 `;
 export interface MapProps {
 
