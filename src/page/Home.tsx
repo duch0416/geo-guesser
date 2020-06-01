@@ -10,9 +10,9 @@ const Wrapper = styled.div`
 `
 
 const Home: React.SFC = () => {
-    const {cordinates} = useRandomCordinates()
+    const {getRandomCordinates ,cordinates} = useRandomCordinates()
     return ( 
-        <Wrapper onClick={() => console.log(cordinates)}></Wrapper>
+    <Wrapper onClick={getRandomCordinates}>{cordinates}</Wrapper>
      );
 }
  

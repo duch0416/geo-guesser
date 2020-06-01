@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react"
+import {useState} from "react"
 
 export const useRandomCordinates = () => {
     const [cordinates, setCordinates] = useState<any>([])
@@ -7,11 +7,12 @@ export const useRandomCordinates = () => {
         return (Math.random() * (to - from) + from).toFixed(fixed);
     }
 
-    useEffect(() => {
+    const getRandomCordinates = () => {
         setCordinates([getRandomInRange(-180, 180, 3), getRandomInRange(-90, 90, 3)])
-    },[])
+    }
 
     return{
+        getRandomCordinates,
         cordinates
     }
 }
