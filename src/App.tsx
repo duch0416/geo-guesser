@@ -1,7 +1,8 @@
 import React from "react";
 import { createGlobalStyle } from "styled-components";
 
-import Home from "./page/Home"
+import Home from "./page/Home";
+import { CordinatesProvider } from "./store/cordinatesReducer/CordinatesContext";
 
 const GlobalStyle = createGlobalStyle`
   *{
@@ -15,7 +16,9 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <Home/>
+      <CordinatesProvider>
+        <Home />
+      </CordinatesProvider>
       {/* <MapContainer/> */}
     </>
   );

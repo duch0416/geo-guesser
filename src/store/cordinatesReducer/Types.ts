@@ -1,5 +1,5 @@
 export type initStateType =  {
-    cordinates: Array<number>
+    cordinates: Array<string>
 }
 
 export enum Actions {

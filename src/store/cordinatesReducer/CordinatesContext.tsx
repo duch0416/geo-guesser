@@ -4,10 +4,10 @@ import { initStateType } from "./Types";
 import { reducer } from "./CordinatesReducer";
 
 const initState = {
-  cordinates: [0, 0],
+  cordinates: ["", ""],
 };
 
-const CordinatesContext = createContext<{
+export const CordinatesContext = createContext<{
   state: initStateType;
   dispatch: Dispatch<any>;
 }>({ state: initState, dispatch: () => null });
