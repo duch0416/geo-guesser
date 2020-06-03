@@ -1,34 +1,27 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Map as LeafletMap, TileLayer } from "react-leaflet";
+import GoogleMapReact from 'google-map-react';
+
 
 const Wrapper = styled.div`
   display: flex;
-  width: 100%;
-  height: 100vh;
+  width: 500px;
+  height: 500px;
   justify-content: center;
   align-items: center;
-  /* background-color: red; */
 `;
 
-
-const Map = styled(LeafletMap)`
-    width: 80%;
-    height: 80%;
-`;
-export interface MapProps {
-
-}
+export interface MapProps {}
 
 const MapContainer: React.SFC<MapProps> = () => {
   return (
     <Wrapper>
-      <Map center={[51.505, 20.05]} zoom={11}>
-      <TileLayer
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url='https://{s}.tile.osm.org/{z}/{x}/{y}.png'
-        />
-    </Map>
+      <GoogleMapReact
+          bootstrapURLKeys={{ key: `${process.env.REACT_APP_GOOGLE_API_KEY}`}}
+          defaultCenter={{lat: 59.95, lng: 30.33}}
+          defaultZoom={11}
+        >
+        </GoogleMapReact>
     </Wrapper>
   );
 };
