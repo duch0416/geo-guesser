@@ -1,9 +1,9 @@
 import * as React from "react";
 import styled from "styled-components";
-import GoogleMapReact from 'google-map-react';
+import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 
 
-const Wrapper = styled.div`
+const Map = styled(GoogleMap)`
   display: flex;
   width: 500px;
   height: 500px;
@@ -15,15 +15,11 @@ export interface MapProps {}
 
 const MapContainer: React.SFC<MapProps> = () => {
   return (
-    <Wrapper>
-      <GoogleMapReact
-          bootstrapURLKeys={{ key: `${process.env.REACT_APP_GOOGLE_API_KEY}`}}
-          defaultCenter={{lat: 59.95, lng: 30.33}}
-          defaultZoom={11}
-        >
-        </GoogleMapReact>
-    </Wrapper>
+    <Map
+      defaultZoom={8}
+      defaultCenter={{ lat: -34.397, lng: 150.644 }}
+    />
   );
 };
 
-export default MapContainer;
+export default withScriptjs(withGoogleMap(MapContainer));

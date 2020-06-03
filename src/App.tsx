@@ -10,6 +10,10 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     font-family: 'Roboto', sans-serif;
   }
+ 
+.gm-style a[href^="https://maps.google.com/maps"] {
+  display: none !important;
+}
 `;
 
 function App() {
