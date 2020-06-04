@@ -1,33 +1,71 @@
-import * as React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import {
-  withScriptjs,
-  withGoogleMap,
-  StreetViewPanorama,
-  OverlayView,
   GoogleMap,
-} from "react-google-maps";
+  LoadScript,
+  StreetViewPanorama,
+  StreetViewService,
+} from "@react-google-maps/api";
+
+import { CordinatesContext } from './../store/cordinatesReducer/CordinatesContext';
+import { setCords } from './../store/cordinatesReducer/Actions';
+import { useContext} from "react"
 
 const Pano = styled(StreetViewPanorama)`
   display: flex;
-  width: 500px;
-  height: 500px;
+  width: 100%;
+  height: 100vh;
   justify-content: center;
   align-items: center;
 `;
 
 export interface StreetView {}
 
+const containerStyle = {
+  width: "100%",
+  height: "100vh",
+};
+
+const center = {
+  lat:  51.1069200,
+  lng: 16.9299300
+};
+
 const StreetView: React.SFC<StreetView> = () => {
+  const [panoId, setPanoId] = useState("");
+  const {state, dispatch} = useContext(CordinatesContext)
+  const onLoad = (streetViewService: any) => {
+    streetViewService.getPanorama(
+      {
+        location: center,
+        preference: "nearest",
+        radius: 500,
+        source: 'outdoor'
+      },
+      (data: any, status: any) => {
+        dispatch(setCords([data.location.latLng.lat(), data.location.latLng.lng()]))
+        console.log(state)
+        setPanoId(data.location.pano)
+      }
+    );
+  };
+
   return (
-    <GoogleMap>
-      <Pano
-        defaultPosition={{ lat: 46.9171876, lng: 17.895183 }}
-        visible
-        defaultOptions={{disableDefaultUI: true, showRoadLabels: false, enableCloseButton:false}}
-      ></Pano>
-    </GoogleMap>
+    <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_API_KEY}>
+      <GoogleMap mapContainerStyle={containerStyle} zoom={7} center={center}>
+        <Pano
+          pano={panoId}
+          visible={true}
+          options={{
+            disableDefaultUI: true,
+            showRoadLabels: false,
+            enableCloseButton: false,
+          }}
+        />
+        <StreetViewService onLoad={onLoad} />
+      </GoogleMap>
+    </LoadScript>
   );
 };
 
-export default withScriptjs(withGoogleMap(StreetView));
+export default StreetView;

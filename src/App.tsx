@@ -11,9 +11,15 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Roboto', sans-serif;
   }
  
-.gm-style a[href^="https://maps.google.com/maps"] {
-  display: none !important;
-}
+  .gm-style a[href^="https://maps.google.com/maps"] {
+    display: none !important;
+  }
+  .gmnoprint div {
+      background:none !important;
+  }
+  .gmnoprint a, .gmnoprint span, .gm-style-cc {
+      display:none;
+  }
 `;
 
 function App() {
@@ -23,7 +29,6 @@ function App() {
       <CordinatesProvider>
         <Home />
       </CordinatesProvider>
-      {/* <MapContainer/> */}
     </>
   );
 }
